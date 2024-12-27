@@ -6,5 +6,9 @@ namespace CarRental.Data.Abstract
     {
         public  Task<List<T>> TGetAllAsync();
         public Task<T> TGetByIdAsync(int id);
+
+        public Task TAddAsync(T entity);
+        public Task TUpdateAsync(T entity);
+        public Task TDeleteAsync(int id);
     }
 }

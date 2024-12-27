@@ -1,4 +1,5 @@
-﻿using CarRental.Services.Abstract;
+﻿using CarRental.Models;
+using CarRental.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -25,6 +26,13 @@ namespace CarRental.Controllers
                 return NotFound("No cars found!");
             }
             return Ok(cars);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCar(Car car)
+        {
+            await _carService.AddAsync(car);
+            return Ok();
         }
     }
 }

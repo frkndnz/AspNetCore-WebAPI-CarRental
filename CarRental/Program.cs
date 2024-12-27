@@ -1,6 +1,7 @@
 using CarRental.Data.Abstract;
 using CarRental.Data.Concrete;
 using CarRental.Data.Repository;
+using CarRental.Extensions;
 using CarRental.Models;
 using CarRental.Services.Abstract;
 using CarRental.Services.Concrete;
@@ -9,10 +10,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped(typeof(IGenericRepository<>),typeof( GenericRepository<>));
-builder.Services.AddScoped(typeof(IGenericService<>),typeof( GenericService<>));
-builder.Services.AddScoped(typeof(ICarService),typeof(CarService));
-builder.Services.AddScoped(typeof(ICarRepository),typeof(CarRepository));
+builder.Services.AddApplicationServices();
 
 builder.Services.AddDbContext<Context>(options =>
 {

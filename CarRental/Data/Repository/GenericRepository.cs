@@ -12,16 +12,34 @@ namespace CarRental.Data.Repository
         {
             _context = context;
         }
-        public Task<List<T>> TGetAllAsync()
+
+        public async Task TAddAsync(T entity)
         {
-            var dbSet = _context.Set<T>();
-            return dbSet.ToListAsync();
+            var dbSet=_context.Set<T>();
+            await dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<T> TGetByIdAsync(int id)
+        public Task TDeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<T>> TGetAllAsync()
         {
             var dbSet = _context.Set<T>();
-            return dbSet.FirstOrDefaultAsync(x => x.Id == id);
+            return await dbSet.ToListAsync();
+        }
+
+        public async Task<T> TGetByIdAsync(int id)
+        {
+            var dbSet = _context.Set<T>();
+            return await dbSet.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public Task TUpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
