@@ -9,6 +9,8 @@ namespace CarRental.Extensions
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
+            
+
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
             services.AddScoped(typeof(ICarService), typeof(CarService));

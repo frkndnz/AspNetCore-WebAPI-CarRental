@@ -6,12 +6,13 @@ using CarRental.Models;
 using CarRental.Services.Abstract;
 using CarRental.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
-
+using AutoMapper;
+using CarRental.Mapping;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddApplicationServices();
-
+builder.Services.AddApplicationServices(); // ***** addscope extensions method *****
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddDbContext<Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));

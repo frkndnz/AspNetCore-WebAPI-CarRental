@@ -17,9 +17,9 @@ namespace CarRental.Services.Concrete
              await _repository.TAddAsync(entity);
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+          await  _repository.TDeleteAsync(id);
         }
 
         public async Task<List<T>> GetAllAsync()
@@ -32,9 +32,9 @@ namespace CarRental.Services.Concrete
             return await _repository.TGetByIdAsync(id);
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            await _repository.TUpdateAsync(entity);
         }
     }
 }
