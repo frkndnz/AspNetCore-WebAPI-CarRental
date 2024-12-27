@@ -1,0 +1,51 @@
+# Genel Ayarlar
+*.DS_Store
+*.log
+*.swp
+*.swo
+
+# Visual Studio kullanıcı dosyaları
+.vscode/
+.vs/
+.idea/
+
+# Bin ve Obj Klasörleri
+bin/
+obj/
+
+# Paketler
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# .NET Yayımlama Ayarları
+.publish/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Tarayıcı Cache Dosyaları
+libman.json
+libman.cache/
+
+# DotNet User İşlemleri
+*.dotnet_user_profiles
+/.vs/
+.vscode/
+
+# Rider ve Diğer IDE Dosyaları
+.idea/
+*.sln.iml
+*.userprefs
+
+# Bazı Paket Yöneticisi Dosyaları
+node_modules/
+
+# Secrets Dosyası (gizli anahtarlar için)
+secrets.json
+appsettings.*.json
