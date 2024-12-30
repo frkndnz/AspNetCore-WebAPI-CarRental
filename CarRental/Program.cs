@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddApplicationServices(); // ***** addscope extensions method *****
+
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddDbContext<Context>(options =>
 {
