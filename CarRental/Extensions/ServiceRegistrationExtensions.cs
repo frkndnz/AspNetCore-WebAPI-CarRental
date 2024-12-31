@@ -3,13 +3,15 @@ using CarRental.Data.Repository;
 using CarRental.Services.Abstract;
 using CarRental.Services.Concrete;
 
+
+
 namespace CarRental.Extensions
 {
     public static class ServiceRegistrationExtensions
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            
+
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
@@ -22,6 +24,13 @@ namespace CarRental.Extensions
 
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+
+            services.AddScoped(typeof(IRentalService), typeof(RentalService));
+            services.AddScoped(typeof(IRentalRepository), typeof(RentalRepository));
+
+
+            
+            services.AddScoped(typeof(IPdfService), typeof(PdfService));
         }
     }
 }

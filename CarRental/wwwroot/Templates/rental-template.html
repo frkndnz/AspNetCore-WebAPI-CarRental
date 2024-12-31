@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Araç Kiralama Detayları</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .rental-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        .header {
+            background: #0d6efd;
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        .rental-info {
+            padding: 30px;
+        }
+        .price-section {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .dates-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .footer {
+            border-top: 1px solid #dee2e6;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container rental-container">
+        <div class="header text-center">
+            <img src="{CompanyLogo}" alt="Şirket Logo" class="logo">
+            <h1 class="display-6">Araç Kiralama Belgesi</h1>
+            <p class="lead mb-0">Belge No: {DocumentNumber}</p>
+        </div>
+
+        <div class="rental-info">
+            <!-- Müşteri Bilgileri -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Müşteri Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Ad Soyad:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            {UserFullName}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>E-posta:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            {UserEmail}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Telefon:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            {UserPhone}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Araç Bilgileri -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Araç Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Marka:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            {CarBrand}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Model:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            {CarModel}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kiralama Detayları -->
+            <div class="dates-section">
+                <h5 class="text-primary mb-3">Kiralama Tarihleri</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">Başlangıç Tarihi</h6>
+                                <p class="card-text">{RentalStartDate}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">Bitiş Tarihi</h6>
+                                <p class="card-text">{RentalEndDate}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fiyat Bilgisi -->
+            <div class="price-section">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5 class="text-primary mb-0">Toplam Tutar</h5>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <h3 class="text-success mb-0">{Price} TL</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="mb-1">Bu belge {GenerationDate} tarihinde oluşturulmuştur.</p>
+            <p class="mb-0">© 2024 Araç Kiralama Şirketi. Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

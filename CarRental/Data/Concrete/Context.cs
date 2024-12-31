@@ -14,5 +14,6 @@ namespace CarRental.Data.Concrete
         public DbSet<Car> Cars { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
     }
 }
