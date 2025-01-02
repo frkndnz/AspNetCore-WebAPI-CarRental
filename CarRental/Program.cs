@@ -1,13 +1,13 @@
 using CarRental.Data.Abstract;
 using CarRental.Data.Concrete;
 using CarRental.Data.Repository;
-using CarRental.Extensions;
 using CarRental.Models;
 using CarRental.Services.Abstract;
 using CarRental.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using CarRental.Mapping;
+using CarRental.Core.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

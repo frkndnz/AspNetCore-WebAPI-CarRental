@@ -9,17 +9,13 @@ namespace CarRental.Services.Concrete
     public class PdfService : IPdfService
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private string _templatePath;
-        
         public PdfService(IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
-            
         }
-
         public async Task<byte[]> GenerateRentalPdfAsync(RentalDTO model)
         {
-            _templatePath = Path.Combine(_webHostEnvironment.WebRootPath, "Templates", "rental-template.html");
+            string _templatePath = Path.Combine(_webHostEnvironment.WebRootPath, "Templates", "rental-template.html");
             string htmlTemplate = await File.ReadAllTextAsync(_templatePath);
 
             string html = htmlTemplate

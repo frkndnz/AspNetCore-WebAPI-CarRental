@@ -47,7 +47,7 @@ namespace CarRental.Controllers
             var cars= await _carService.GetCarsByCategory(id);
             if (cars == null || !cars.Any())
             {
-                return NotFound();
+                return NotFound("Cars not found!");
             }
             else
             {
@@ -58,15 +58,29 @@ namespace CarRental.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCar([FromBody] CreateCarDto createCarDto)
         {
-            await _carService.AddAsync(createCarDto);
-            return Ok();
+           var result= await _carService.AddAsync(createCarDto);
+            if(result.IsSuccess)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCar([FromBody] UpdateCarDto updateCarDto)
         {
-            await _carService.UpdateAsync(updateCarDto);
-            return Ok();
+            var result= await _carService.UpdateAsync(updateCarDto);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
 
 

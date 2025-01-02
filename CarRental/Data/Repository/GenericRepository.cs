@@ -38,7 +38,7 @@ namespace CarRental.Data.Repository
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> TGetByIdAsync(int id)
+        public async Task<T?> TGetByIdAsync(int id)
         {
             return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }

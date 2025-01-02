@@ -1,11 +1,14 @@
 ﻿using CarRental.Data.Abstract;
 using CarRental.Data.Repository;
+using CarRental.Models;
 using CarRental.Services.Abstract;
 using CarRental.Services.Concrete;
+using CarRental.Services.ValidationRules;
+using FluentValidation;
 
 
 
-namespace CarRental.Extensions
+namespace CarRental.Core.Extensions
 {
     public static class ServiceRegistrationExtensions
     {
@@ -29,8 +32,10 @@ namespace CarRental.Extensions
             services.AddScoped(typeof(IRentalRepository), typeof(RentalRepository));
 
 
-            
+
             services.AddScoped(typeof(IPdfService), typeof(PdfService));
+
+            services.AddScoped(typeof(IValidator<Car>), typeof(CarValidator));
         }
     }
 }
