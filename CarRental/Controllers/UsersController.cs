@@ -39,8 +39,12 @@ namespace CarRental.Controllers
             if (ModelState.IsValid)
             {
                 var createUserDto = _mapper.Map<CreateUserDTO>(viewModel);
-                await _userService.AddAsync(createUserDto);
-                return Ok();
+                var result= await _userService.AddAsync(createUserDto);
+
+                if(!result.IsSuccess)
+                    return BadRequest(result.Message);
+
+                return Ok(result.Message);
             }
             else
             {
