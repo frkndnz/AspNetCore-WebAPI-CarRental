@@ -1,4 +1,5 @@
-﻿using CarRental.DTO_s.Category;
+﻿using CarRental.Core.Utilities;
+using CarRental.DTO_s.Category;
 using CarRental.Models;
 
 namespace CarRental.Services.Abstract
@@ -8,9 +9,9 @@ namespace CarRental.Services.Abstract
         public Task<List<CategoryDTO>> GetAllDtoAsync();
         public Task<CategoryDTO> GetByIdDtoAsync(int id);
 
-        public Task AddAsync(CreateCategoryDTO  createCategoryDTO);
+        public Task<Result> AddAsync(CreateCategoryDTO  createCategoryDTO);
 
-        public Task UpdateAsync(CategoryDTO categoryDTO);
+        public Task<Result> UpdateAsync(CategoryDTO categoryDTO);
         
     }
 }

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using CarRental.Core.Utilities;
 using CarRental.Data.Abstract;
 using CarRental.DTO_s.Rental;
 using CarRental.Models;
 using CarRental.Services.Abstract;
+using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CarRental.Services.Concrete
@@ -11,19 +13,35 @@ namespace CarRental.Services.Concrete
     {
         private readonly IRentalRepository _rentalRepository;
         private readonly IGenericRepository<Car> _carRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public RentalService(IRentalRepository genericRepository, IGenericRepository<Car> carRepository, IMapper mapper) : base(genericRepository)
+        private readonly IValidator<Rental> _validator;
+        public RentalService(IRentalRepository genericRepository, IGenericRepository<Car> carRepository, IMapper mapper, IValidator<Rental> validator, IUserRepository userRepository) : base(genericRepository)
         {
             _rentalRepository = genericRepository;
             _carRepository = carRepository;
             _mapper = mapper;
+            _validator = validator;
+            _userRepository = userRepository;
         }
 
-        public async Task AddDtoAsync(CreateRentalDTO createRentalDTO)
+        public async Task<Result> AddDtoAsync(CreateRentalDTO createRentalDTO)
         {
             var rentalEntity = _mapper.Map<Rental>(createRentalDTO);
+
+            var user=await _userRepository.TGetByIdAsync(rentalEntity.UserId);
+            if (user == null) return new Result(false, "user not found!");
+
+            var car = await _carRepository.TGetByIdAsync(rentalEntity.CarId);
+            if (car == null) return new Result(false,"car not found!");
+
+            var validatorResult=await _validator.ValidateAsync(rentalEntity);
+            if(!validatorResult.IsValid)
+                return new Result(false,string.Join("\n",validatorResult.Errors.Select(e=>e.ErrorMessage)));
+
             rentalEntity.Price = await GetTotalPriceAsync(createRentalDTO);
             await _rentalRepository.TUpdateAsync(rentalEntity);
+            return new Result(true, "Added rental successfully");
         }
 
         public async Task<List<RentalDTO>> GetAllDtoAsync()

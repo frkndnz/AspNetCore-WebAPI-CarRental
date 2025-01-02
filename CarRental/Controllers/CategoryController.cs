@@ -1,4 +1,5 @@
-﻿using CarRental.DTO_s.Category;
+﻿using CarRental.Core.Utilities;
+using CarRental.DTO_s.Category;
 using CarRental.Models;
 using CarRental.Services.Abstract;
 using CarRental.Services.Concrete;
@@ -36,8 +37,8 @@ namespace CarRental.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById(int id)
         {
-            var category= await _categoryService.GetByIdDtoAsync(id);
-            if(category==null)
+            var category = await _categoryService.GetByIdDtoAsync(id);
+            if (category == null)
             {
                 return BadRequest("Category not found!");
             }
@@ -48,24 +49,30 @@ namespace CarRental.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategory([FromBody]CreateCategoryDTO createCategoryDTO)
+        public async Task<IActionResult> AddCategory([FromBody] CreateCategoryDTO createCategoryDTO)
         {
-            await _categoryService.AddAsync(createCategoryDTO);
-            return Ok();
+            var result = await _categoryService.AddAsync(createCategoryDTO);
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result.Message);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCategory([FromBody]CategoryDTO categoryDTO)
+        public async Task<IActionResult> UpdateCategory([FromBody] CategoryDTO categoryDTO)
         {
-            await _categoryService.UpdateAsync(categoryDTO);
-            return Ok();
+            var result = await _categoryService.UpdateAsync(categoryDTO);
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result.Message);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             await _categoryService.DeleteAsync(id);
-            return Ok("Successful");
+            return Ok("Successfully");
         }
 
     }

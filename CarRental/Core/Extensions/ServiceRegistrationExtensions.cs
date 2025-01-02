@@ -36,6 +36,10 @@ namespace CarRental.Core.Extensions
             services.AddScoped(typeof(IPdfService), typeof(PdfService));
 
             services.AddScoped(typeof(IValidator<Car>), typeof(CarValidator));
+            services.AddScoped(typeof(IValidator<Category>), typeof(CategoryValidator));
+            services.AddScoped(typeof(IValidator<Rental>), typeof(RentalValidator));
+
+            
         }
     }
 }

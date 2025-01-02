@@ -26,8 +26,8 @@ namespace CarRental.Controllers
             var rentals = await _rentalService.GetAllDtoAsync();
             return Ok(rentals);
         }
-        [HttpGet("{id}")]
 
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetRentalById(int id)
         {
             var rental = await _rentalService.GetByIdDtoAsync(id);
@@ -59,8 +59,11 @@ namespace CarRental.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRental(CreateRentalDTO createRentalDTO)
         {
-            await _rentalService.AddDtoAsync(createRentalDTO);
-            return Ok();
+            var result = await _rentalService.AddDtoAsync(createRentalDTO);
+            if(!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result.Message);
         }
     }
 }
